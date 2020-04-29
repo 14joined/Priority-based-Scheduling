@@ -63,7 +63,7 @@ int main() {
         for(int i = 1; i <= flag; ++i) {
             cout << "\nP" << Executed_processes[i];
         }
-        cout << "\nIdle at " << flag;
+        cout << "\nIdle at " << flag+1;
     } else {
         for(int i = 1; i <= flag; ++i) {
             cout << Executed_processes[i] << " ";
