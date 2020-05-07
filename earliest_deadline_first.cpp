@@ -18,7 +18,7 @@ int quantity[NPROCESSES], qpet[NPROCESSES], deadlines[NPROCESSES];
 bool check_quantities(int *A, int n); 
 
 int main() {
-    //freopen("file.in", "r", stdin);
+    freopen("file.in", "r", stdin);
     int n;
     double CPU_utilization = 0;
     //cout << "Enter the number of processes: "; 
@@ -51,13 +51,18 @@ int main() {
                 for(int k = 1; k <= processes[j].execution_time; ++k) { q.push({-deadlines[j], j}); }
             }
         }
-        Executed_processes[++count] = q.top().second;
-        ++qpet[q.top().second];
-        if(qpet[q.top().second] == processes[q.top().second].execution_time) { 
-            ++quantity[q.top().second];
-            qpet[q.top().second] = 0;
+
+        if(!q.empty()) {
+            Executed_processes[++count] = q.top().second;
+            ++qpet[q.top().second];
+            if(qpet[q.top().second] == processes[q.top().second].execution_time) { 
+                ++quantity[q.top().second];
+                qpet[q.top().second] = 0;
+            }
+            q.pop();
+        } else {
+            Executed_processes[++count] = -1;
         }
-        q.pop();
         if(check_quantities(quantity, n)) { flag = ++i; break; }
     }
     cout << "Execution orders by EDF ";
