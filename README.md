@@ -8,6 +8,7 @@ EDF updates the priorities of processes at every period of time (1 time unit in 
 The priorities will be assigned in order of deadline. 
 
 /* Example input */
+
 3       // three processes
 
 1 4     // execution time : 1, period : 4
