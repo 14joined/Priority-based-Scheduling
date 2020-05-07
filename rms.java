@@ -37,11 +37,12 @@ public class rms {
                     int remainder = i % processes[j].getPeriod();
                     if(remainder == 0) {
                         if(i!=0 && quantity[j] != i/processes[j].getPeriod()+1
-                            && quantity[j] != i/processes[j].getPeriod()) {
+                                && quantity[j] != i/processes[j].getPeriod()) {
                             for(int k = 1; k <= i; ++k) {
                                 System.out.print(Executed_processes[k] + " ");
                             }
                             System.out.println("\nRMS misses process's deadline at " + i + "!");
+                            return;
                         }
                         for(int k = 1; k <= processes[j].getExecution_time(); ++k) q.add(j);
                     }
@@ -51,13 +52,18 @@ public class rms {
                     prnt(Executed_processes, i);
                     return;
                 }
-                Executed_processes[++count] = q.peek();
-                ++qpet[q.peek()];
-                if(qpet[q.peek()] == processes[q.peek()].getExecution_time()) {
-                    ++quantity[q.peek()];
-                    qpet[q.peek()] = 0;
+
+                if (!q.isEmpty()) {
+                    Executed_processes[++count] = q.peek();
+                    ++qpet[q.peek()];
+                    if (qpet[q.peek()] == processes[q.peek()].getExecution_time()) {
+                        ++quantity[q.peek()];
+                        qpet[q.peek()] = 0;
+                    }
+                    q.remove();
+                } else {
+                    Executed_processes[++count] = -1;
                 }
-                q.remove();
             }
         }
     }
