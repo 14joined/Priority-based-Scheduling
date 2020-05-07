@@ -65,16 +65,16 @@ int main() {
         }
         if(check_quantities(quantity, n)) { flag = ++i; break; }
     }
-    cout << "Execution orders by EDF ";
+    cout << "Execution orders by EDF\n";
     if(flag < lcm) {
         for(int i = 1; i <= flag; ++i) {
-            cout << i - 1 << " " << i << " - ";
+            cout << i - 1 << " - " << i << " : ";
             cout << "P" << Executed_processes[i] << '\n';
         }
         cout << "\nIdle at " << flag;
     } else {
         for(int i = 1; i <= flag; ++i) {
-            cout << i - 1 << " " << i << " - ";
+            cout << i - 1 << " - " << i << " : ";
             cout << " P" << Executed_processes[i] << '\n';
         }
     }
