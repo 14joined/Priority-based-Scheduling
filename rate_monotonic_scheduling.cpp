@@ -67,13 +67,13 @@ int main() {
     if (flag < lcm) {
         for (int i = 1; i <= flag; ++i) {
             cout << i - 1 << " " << i << " - ";
-            cout << "P" << Executed_processes[i];
+            cout << "P" << Executed_processes[i] << '\n';
         }
         cout << "\nIdle at " << flag+1;
     } else {
         for (int i = 1; i <= flag; ++i) {
             cout << i - 1 << " " << i << " - ";
-            cout << "P" << Executed_processes[i];
+            cout << "P" << Executed_processes[i] << '\n';
         }
     }
 
