@@ -23,7 +23,7 @@ int main() {
     double CPU_utilization = 0;
     //cout << "Enter the number of processes: "; 
     cin >> n; 
-    for(int i = 1; i <= n; ++i) {
+    for (int i = 1; i <= n; ++i) {
         int x, y;
         cin >> x >> y;
         lcm = lcm*y/__gcd(lcm, y);
@@ -32,41 +32,48 @@ int main() {
         processes[i].period = y;
     }
 
-    if(CPU_utilization > 1) { cout << "Error! Require more than 100% of the available CPU cycles!"; return 0;}
+    if (CPU_utilization > 1) { cout << "Error! Require more than 100% of the available CPU cycles!"; return 0;}
 
     int count = 0, flag;
-    for(int i = 0; i <= lcm; ++i) {
-        for(int j = 1; j <= n; ++j) {
+    for (int i = 0; i <= lcm; ++i) {
+        for (int j = 1; j <= n; ++j) {
             int remainder = i % processes[j].period;
-            if(remainder == 0) {
-                if(i && quantity[j] != i/processes[j].period+1 && quantity[j] != i/processes[j].period) { 
-                    for(int k = 1; k <= i; ++k) {
-                        cout << Executed_processes[k] << " ";
+            if (remainder == 0) {
+                if (i && quantity[j] != i/processes[j].period+1 && quantity[j] != i/processes[j].period) { 
+                    for (int k = 1; k <= i; ++k) {
+                        cout << "P" << Executed_processes[k] << " ";
                     }
                     cout << "\nRMS misses process's deadline at " << i << "!"; 
                     return 0; 
                 }
-                for(int k = 1; k <= processes[j].execution_time; ++k) q.push(-j); 
+                for (int k = 1; k <= processes[j].execution_time; ++k) q.push(-j); 
             }
         }
-        Executed_processes[++count] = -q.top();
-        ++qpet[-q.top()];
-        if(qpet[-q.top()] == processes[-q.top()].execution_time) { 
-            ++quantity[-q.top()];
-            qpet[-q.top()] = 0;
+
+        if (!q.empty()) {
+            Executed_processes[++count] = -q.top();
+            ++qpet[-q.top()];
+            if (qpet[-q.top()] == processes[-q.top()].execution_time) { 
+                ++quantity[-q.top()];
+                qpet[-q.top()] = 0;
+            }
+            q.pop();
+        } else {
+            Executed_processes[++count] = -1;
         }
-        q.pop();
-        if(check_quantities(quantity, n)) { flag = ++i; break; }
+        if (check_quantities(quantity, n)) { flag = ++i; break; }
     }
     cout << "Execution orders by RMS ";
-    if(flag < lcm) {
-        for(int i = 1; i <= flag; ++i) {
-            cout << "\nP" << Executed_processes[i];
+    if (flag < lcm) {
+        for (int i = 1; i <= flag; ++i) {
+            cout << i - 1 << " " << i << " - ";
+            cout << "P" << Executed_processes[i];
         }
         cout << "\nIdle at " << flag+1;
     } else {
-        for(int i = 1; i <= flag; ++i) {
-            cout << Executed_processes[i] << " ";
+        for (int i = 1; i <= flag; ++i) {
+            cout << i - 1 << " " << i << " - ";
+            cout << "P" << Executed_processes[i];
         }
     }
 
@@ -74,8 +81,8 @@ int main() {
 }
 
 bool check_quantities(int *A, int n) {
-    for(int i = 1; i <= n; ++i) {
-        if(quantity[i] != lcm/processes[i].period) return false;
+    for (int i = 1; i <= n; ++i) {
+        if (quantity[i] != lcm/processes[i].period) return false;
     }
     return true;
 }
