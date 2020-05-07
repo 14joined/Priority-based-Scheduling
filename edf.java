@@ -51,6 +51,7 @@ public class edf {
                                 System.out.print(Executed_processes[k] + " ");
                             }
                             System.out.println("\nEDF misses process's deadline at " + i + "!");
+                            return;
                         }
                         processes[j].deadline += processes[j].period;
                         for(int k = 1; k <= processes[j].execution_time; ++k) q.add(processes[j]);
@@ -61,13 +62,18 @@ public class edf {
                     prnt(Executed_processes, i);
                     return;
                 }
-                Executed_processes[++count] = q.peek().getId();
-                ++qpet[q.peek().getId()];
-                if(qpet[q.peek().getId()] == processes[q.peek().getId()].getExecution_time()) {
-                    ++quantity[q.peek().getId()];
-                    qpet[q.peek().getId()] = 0;
+
+                if(!q.isEmpty()) {
+                    Executed_processes[++count] = q.peek().getId();
+                    ++qpet[q.peek().getId()];
+                    if (qpet[q.peek().getId()] == processes[q.peek().getId()].getExecution_time()) {
+                        ++quantity[q.peek().getId()];
+                        qpet[q.peek().getId()] = 0;
+                    }
+                    q.remove();
+                } else {
+                    Executed_processes[++count] = -1;
                 }
-                q.remove();
             }
         }
     }
