@@ -68,12 +68,14 @@ int main() {
     cout << "Execution orders by EDF ";
     if(flag < lcm) {
         for(int i = 1; i <= flag; ++i) {
-            cout << '\n' << i - 1 << " P" << Executed_processes[i];
+            cout << i - 1 << " " << i << " - ";
+            cout << "P" << Executed_processes[i] << '\n';
         }
         cout << "\nIdle at " << flag;
     } else {
         for(int i = 1; i <= flag; ++i) {
-            cout << '\n' << i - 1 << " P" << Executed_processes[i];
+            cout << i - 1 << " " << i << " - ";
+            cout << " P" << Executed_processes[i] << '\n';
         }
     }
 
