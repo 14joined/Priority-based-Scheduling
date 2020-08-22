@@ -25,10 +25,7 @@ Case 1: The combinations of processes can require more than 100% of the availabl
 Case 2: With RMS, there are some inputs which lead to missing process's dealine. 
 The output will be written in a line.
 
-Case 3: Everything works fine and we get the execution orders by RMS or EDF scheduling. 
-
-Alert: No one has verified my code yet, so mistakes can be inevitable! 
-And by the way, I have not written any README before, and I really want to receive any corrections and suggestions!
+Case 3: Everything works fine and we get the execution orders by RMS or EDF scheduling.
 
 Email: khang.vt183561@sis.hust.edu.vn
 
