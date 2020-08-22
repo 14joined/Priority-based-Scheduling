@@ -1,6 +1,6 @@
 # Priority-based-Scheduling
 
-Rate-Monotonic Scheduling and Earliest-Deadline-First in C++ and Java 
+Rate-Monotonic Scheduling and Earliest-Deadline-First in C++ and Java (Naive implementations)
 
 In RMS, the priorities are assigned by rank order of period, the shortest period has the highest rank.
 
